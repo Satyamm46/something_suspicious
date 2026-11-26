@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Something suspicious...</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--p1:#ffe3ee;--p2:#ffb3d1;--p3:#ff7eb6;--p4:#ff2e93;--pu:#9b6bff;--ink:#3a1030;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{font-family:Fredoka,Poppins,Inter,system-ui,sans-serif;color:var(--ink);background:linear-gradient(135deg,#ffe3ee,#ffc2dd 50%,#e8d5ff);overflow:hidden;overscroll-behavior:none;transition:background 3s}
+body.lock{touch-action:none}
+.blob{position:fixed;border-radius:50%;filter:blur(50px);opacity:.7;z-index:0;animation:drift 14s ease-in-out infinite alternate}
+.b1{width:48vmax;height:48vmax;background:#ff8cc6;left:-15vmax;top:-12vmax}
+.b2{width:40vmax;height:40vmax;background:#c9a8ff;right:-12vmax;bottom:-10vmax;animation-duration:19s}
+.b3{width:26vmax;height:26vmax;background:#ffd1e6;left:40%;top:35%;animation-duration:23s}
+@keyframes drift{to{transform:translate(8vmax,6vmax) scale(1.2)}}
+#prog{position:fixed;top:calc(env(safe-area-inset-top,0px) + 8px);left:50%;transform:translateX(-50%);width:min(88vw,420px);z-index:20;text-align:center;font-size:12px;font-weight:600}
+#bar{height:14px;border:3px solid var(--ink);border-radius:99px;background:#fff;overflow:hidden;margin-top:3px}
+#fill{display:block;height:100%;width:0;background:repeating-linear-gradient(45deg,var(--p4) 0 10px,var(--p3) 10px 20px);transition:width .8s cubic-bezier(.34,1.8,.5,1)}
+#app{position:relative;z-index:5;height:100%;display:flex;overflow-y:auto;padding:54px 0 20px}
+.scr{margin:auto;width:min(92vw,560px);text-align:center;padding:12px;animation:pop .6s cubic-bezier(.34,1.56,.64,1)}
+.slideH{animation:slideH .7s cubic-bezier(.34,1.3,.64,1)}
+@keyframes slideH{from{transform:translateX(110vw) rotate(8deg)}}
+@keyframes pop{from{opacity:0;transform:scale(.7) rotate(-4deg)}}
+h1{font-size:clamp(2rem,9vw,3.6rem);font-weight:800;line-height:1.05;margin:8px 0 14px}
+h2{font-size:clamp(1.4rem,6vw,2.2rem);font-weight:800;line-height:1.15;margin:10px 0}
+p{font-size:clamp(1rem,4vw,1.2rem);line-height:1.5;margin:8px 0}
+.sm{font-size:.8rem;opacity:.7}
+.big{font-size:clamp(1.6rem,7vw,2.8rem);font-weight:800;line-height:1.2;margin-bottom:22px}
+.tilt{transform:rotate(-2.5deg)}
+.tag{display:inline-block;background:var(--pu);color:#fff;font-weight:800;font-size:.8rem;letter-spacing:.1em;padding:6px 14px;border-radius:99px;transform:rotate(3deg);animation:wig 2.4s ease-in-out infinite;border:3px solid var(--ink)}
+@keyframes wig{50%{transform:rotate(-3deg) scale(1.06)}}
+.btn{font:800 1rem Poppins,sans-serif;background:var(--p4);color:#fff;border:3px solid var(--ink);border-radius:99px;padding:14px 28px;margin-top:16px;box-shadow:4px 4px 0 var(--ink);cursor:pointer;transition:transform .35s cubic-bezier(.34,1.8,.5,1),box-shadow .2s}
+.btn:hover{transform:translate(-2px,-3px) rotate(-3deg) scale(1.07);box-shadow:7px 7px 0 var(--ink)}
+.btn:active{transform:translate(3px,3px) scale(.95);box-shadow:1px 1px 0 var(--ink)}
+.late,.l{animation:appear .6s var(--d,1s) both}
+@keyframes appear{from{opacity:0;visibility:hidden;transform:translateY(14px) scale(.9)}to{opacity:1;visibility:visible}}
+.note{display:flex;gap:12px;text-align:left;align-items:center;background:rgba(255,255,255,.94);border:3px solid var(--ink);border-radius:24px;padding:14px 16px;box-shadow:6px 6px 0 var(--ink);margin:14px 0;cursor:pointer;animation:drop .9s cubic-bezier(.34,1.56,.64,1)}
+.note p{margin:3px 0 0;font-size:1rem}.note b{font-size:.75rem;opacity:.65}
+.noteScr .note{cursor:default}
+.ico{font-size:2rem;background:var(--p2);border-radius:14px;padding:6px 10px;flex:none}
+.buzz{animation:drop .9s cubic-bezier(.34,1.56,.64,1),buzz .5s .95s}
+@keyframes drop{from{transform:translateY(-70vh) rotate(-8deg)}}
+@keyframes buzz{20%,60%{transform:translateX(-7px) rotate(-1deg)}40%,80%{transform:translateX(7px) rotate(1deg)}}
+.loader p{font-weight:600;margin-top:20px}
+.blobby{width:90px;height:90px;margin:auto;background:var(--p3);border:3px solid var(--ink);animation:morph 2s ease-in-out infinite}
+@keyframes morph{0%,100%{border-radius:50% 50% 45% 55%;transform:rotate(0)}50%{border-radius:30% 70% 60% 40%;transform:rotate(180deg) scale(1.15)}}
+.arrow{font-size:5rem;font-weight:800;color:var(--p4);display:inline-block;transition:transform .35s cubic-bezier(.34,1.8,.5,1);animation:bob 1.6s ease-in-out infinite;-webkit-text-stroke:2px var(--ink)}
+@keyframes bob{50%{filter:drop-shadow(0 8px 0 rgba(58,16,48,.25))}}
+.mb{height:22px;border:3px solid var(--ink);border-radius:99px;background:#fff;overflow:hidden;margin:18px auto;width:80%}
+.mb i{display:block;height:100%;width:0;background:var(--p3);transition:width .6s cubic-bezier(.34,1.8,.5,1)}
+.pop{animation:pop .5s cubic-bezier(.34,1.56,.64,1)}
+.bigemoji{font-size:6rem;animation:bounce .8s infinite alternate cubic-bezier(.5,0,.5,1)}
+@keyframes bounce{to{transform:translateY(-24px) rotate(10deg)}}
+#toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 70px);transform:translate(-50%,40px) scale(.6);background:#fff;border:3px solid var(--ink);border-radius:99px;padding:8px 18px;font-weight:600;font-size:.9rem;opacity:0;z-index:60;pointer-events:none;max-width:90vw;text-align:center}
+#toast.on{animation:toast 2.6s cubic-bezier(.34,1.56,.64,1) forwards}
+@keyframes toast{10%,80%{opacity:1;transform:translate(-50%,0) scale(1) rotate(-2deg)}100%{opacity:0;transform:translate(-50%,0) scale(1)}}
+.pad{margin:20px auto 0;width:min(80vw,300px);height:130px;border:3px dashed var(--ink);border-radius:30px;background:rgba(255,255,255,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:600;touch-action:none;user-select:none;transition:transform .1s}
+.pad span{font-size:1.6rem;font-weight:800;color:var(--p4)}
+body.quake #app{animation:quake .8s}
+@keyframes quake{10%{transform:translate(-20px,12px) rotate(-3deg)}30%{transform:translate(22px,-14px) rotate(3deg)}50%{transform:translate(-16px,-10px) rotate(-2deg)}70%{transform:translate(14px,10px) rotate(2deg)}}
+body.spin #app{animation:spin 1.3s cubic-bezier(.5,-.3,.3,1.3)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.track{position:relative;margin:20px auto;width:130px;height:min(46vh,340px);border:3px dashed var(--ink);border-radius:70px;background:rgba(255,255,255,.5)}
+.goal{position:absolute;top:8px;left:0;right:0;font-size:2rem;animation:bounce .7s infinite alternate}
+.pull{position:absolute;bottom:0;left:0;right:0;height:64px;border-radius:70px;background:var(--p4);color:#fff;border:3px solid var(--ink);font-weight:800;font-size:.8rem;display:grid;place-items:center;cursor:grab;touch-action:none;user-select:none;box-shadow:4px 4px 0 var(--ink)}
+.pull.back{transition:transform .7s cubic-bezier(.3,2,.5,1)}
+.scene{position:relative;height:min(42vh,320px);margin-top:10px}
+.stk{position:absolute;font-size:2.6rem;cursor:pointer;transform:rotate(var(--r));animation:wig 3s ease-in-out infinite;user-select:none}
+.stk.hit{animation:buzz .5s}
+.lab{position:absolute;background:#fff;border:3px solid var(--ink);padding:3px 10px;font-size:.7rem;font-weight:800;border-radius:8px;transform:rotate(var(--r));animation:wig 4s infinite}
+.secret{position:fixed;left:7px;bottom:calc(env(safe-area-inset-bottom,0px) + 7px);width:16px;height:16px;border-radius:50%;border:2px solid var(--ink);background:var(--p3);opacity:.35;cursor:pointer;z-index:30;padding:0}
+.secret:hover{opacity:1;transform:scale(1.6)}
+#clue{min-height:1.6em;font-weight:600;color:var(--pu)}
+#mas{position:fixed;right:10px;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);width:46px;height:42px;background:var(--p3);border:3px solid var(--ink);border-radius:50% 50% 45% 55%;z-index:25;cursor:pointer;animation:morph 6s ease-in-out infinite;display:flex;gap:7px;align-items:center;justify-content:center}
+#mas i{width:7px;height:10px;background:var(--ink);border-radius:50%;animation:blink 4s infinite}
+@keyframes blink{95%{transform:scaleY(.1)}}
+.no{position:fixed;z-index:50;margin:0;background:#fff;color:var(--ink);transition:left .5s cubic-bezier(.34,1.8,.5,1),top .5s cubic-bezier(.34,1.8,.5,1),transform .5s cubic-bezier(.34,1.8,.5,1)}
+.yes{font-size:1.25rem;padding:16px 34px;animation:wig 2.5s infinite}
+.grad{background:linear-gradient(90deg,var(--p4),var(--pu),var(--p3));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200%;animation:gr 5s linear infinite}
+@keyframes gr{to{background-position:200%}}
+.opts{display:grid;gap:12px;margin-top:16px}
+.opt{background:#fff;border:3px solid var(--ink);border-radius:20px;padding:16px;font:700 1.05rem Poppins;cursor:pointer;box-shadow:4px 4px 0 var(--ink);transition:transform .35s cubic-bezier(.34,1.8,.5,1)}
+.opt:nth-child(odd){transform:rotate(-1.5deg)}.opt:nth-child(even){transform:rotate(1.5deg)}
+.opt:hover{transform:scale(1.05) rotate(0);background:var(--p1)}
+.stamp{display:inline-block;border:5px solid var(--p4);color:var(--p4);font-weight:800;font-size:1.6rem;padding:8px 16px;border-radius:12px;transform:rotate(-8deg);animation:stamp .6s cubic-bezier(.34,1.8,.5,1)}
+@keyframes stamp{from{transform:scale(4) rotate(20deg);opacity:0}}
+.cf{position:fixed;top:-20px;width:10px;height:16px;z-index:70;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+.sp{position:fixed;pointer-events:none;z-index:80;font-size:14px;animation:spk .8s forwards}
+@keyframes spk{to{opacity:0;transform:translateY(-24px) scale(.3) rotate(90deg)}}
+body.calm{background:linear-gradient(160deg,#fff5f9,#ffe3ee 60%,#f3e8ff)}
+body.calm .blob{animation-duration:60s;opacity:.45}
+body.calm .tag,body.calm .btn,body.calm .grad{animation-duration:12s}
+body.calm .scr{animation-duration:1.6s}
+body.calm .tilt{transform:none}
+body.calm .big{font-weight:600}
+.gif{font-size:3.4rem;display:block;margin:6px 0;animation:bounce .7s infinite alternate cubic-bezier(.5,0,.5,1)}
+#fl{position:fixed;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.fe{position:absolute;bottom:-40px;font-size:1.8rem;opacity:.55;animation:rise linear forwards}
+@keyframes rise{to{transform:translateY(-110vh) rotate(40deg)}}
+body.calm #fl{display:none}
+.sc{position:relative;height:170px;border:3px solid var(--ink);border-radius:24px;overflow:hidden;background:#fff;box-shadow:5px 5px 0 var(--ink);margin:14px 0}
+.under{height:100%;display:flex;flex-direction:column;justify-content:center;padding:12px}
+.under h2{margin:0}
+#cv{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style></head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+<div id="prog"><span id="plabel"></span><div id="bar"><span id="fill"></span></div></div>
+<div id="fl"></div><main id="app"></main><div id="toast"></div><div id="mas" title="hi"><i></i><i></i></div>
+<script>
+const $=(s,r=document)=>r.querySelector(s),app=$('#app'),B=document.body,wait=ms=>new Promise(r=>setTimeout(r,ms));
+const rnd=(a,b)=>Math.random()*(b-a)+a,pick=a=>a[Math.floor(Math.random()*a.length)];
+const put=(h,c='')=>{app.innerHTML='';const s=document.createElement('section');s.className='scr '+c;s.innerHTML=h;app.appendChild(s);app.scrollTop=0;return s};
+const click=(s,q)=>new Promise(r=>$(q,s).addEventListener('click',r,{once:true}));
+const prog=(n,l)=>{$('#fill').style.width=n/5*100+'%';$('#plabel').textContent=l||''};
+const toast=t=>{const e=$('#toast');e.textContent=t;e.classList.remove('on');void e.offsetWidth;e.classList.add('on')};
+const msg=async(h,l='Continue',d=1.2,c='')=>{const s=put(`<div class="big">${h}</div><button class="btn late" style="--d:${d}s">${l}</button>`,c);await click(s,'.btn')};
+const think=async ls=>{for(const l of ls){put(`<div class="loader"><div class="blobby"></div><p>${l}</p></div>`);await wait(2000)}};
+const pickup=async(n,t,l='Continue',d=3)=>{const s=put(`<div class="gif">${pick(['🥰','😳','🫠','🤭','😍','🐻'])}</div><div class="tag">PICKUP LINE 0${n}</div><div class="note buzz"><div class="ico">💌</div><div><b>New message · Just now</b><p>${t}</p></div></div><button class="btn late" style="--d:${d}s">${l}</button>`,'noteScr');try{navigator.vibrate&&navigator.vibrate(60)}catch(e){}await click(s,'.btn')};
+function confetti(n){const c=['#ff2e93','#ff7eb6','#ffb3d1','#9b6bff','#fff','#ffd1e6'];for(let i=0;i<n;i++){const e=document.createElement('i');e.className='cf';e.style.cssText=`left:${rnd(0,100)}vw;background:${pick(c)};animation-duration:${rnd(2.5,5)}s;animation-delay:${rnd(0,.8)}s;border-radius:${Math.random()>.5?'50%':'2px'}`;B.appendChild(e);setTimeout(()=>e.remove(),7000)}}
+const quake=()=>{B.classList.add('quake');setTimeout(()=>B.classList.remove('quake'),900)};
+const A={up:-90,down:90,right:0,left:180},cheers=['Smooth.','Ooh, flexible.','Look at you go.','Suspiciously good.','Chef’s kiss.'];
+
+function one(st,arr){return new Promise(res=>{let sx,sy,t0,on=false;
+ const R=`rotate(${A[st.d]}deg)`;
+ const dn=e=>{on=true;sx=e.clientX;sy=e.clientY;t0=performance.now()};
+ const mv=e=>{if(!on)return;const dx=e.clientX-sx,dy=e.clientY-sy;arr.style.transform=`translate(${dx*.4}px,${dy*.4}px) rotate(${A[st.d]+dx*.08}deg) scale(1.25)`};
+ const up=e=>{if(!on)return;on=false;arr.style.transform=R;const dx=e.clientX-sx,dy=e.clientY-sy,dt=performance.now()-t0,ax=Math.abs(dx),ay=Math.abs(dy);
+  if(Math.max(ax,ay)<60)return;const d=ax>ay?(dx>0?'right':'left'):(dy>0?'down':'up');
+  if(d!==st.d)return toast('Wrong way 😭 the other way!');
+  if(st.m==='fast'&&dt>500)return toast('Faster! Like you’re late for brunch.');
+  if(st.m==='slow'&&dt<450)return toast('Too fast! Sloooowly. Savour it.');
+  fin()};
+ const key=e=>{if(e.key.replace('Arrow','').toLowerCase()===st.d)fin()};
+ const fin=()=>{removeEventListener('pointerdown',dn);removeEventListener('pointermove',mv);removeEventListener('pointerup',up);removeEventListener('pointercancel',up);removeEventListener('keydown',key);arr.style.transform=R;res()};
+ addEventListener('pointerdown',dn);addEventListener('pointermove',mv);addEventListener('pointerup',up);addEventListener('pointercancel',up);addEventListener('keydown',key)})}
+async function swipes(steps,s){const ins=$('.ins',s),arr=$('.arrow',s),bar=$('.mb i',s);let i=0;
+ for(const st of steps){ins.textContent=st.t;ins.classList.remove('pop');void ins.offsetWidth;ins.classList.add('pop');arr.style.transform=`rotate(${A[st.d]}deg)`;
+  await one(st,arr);bar.style.width=++i/steps.length*100+'%';toast(pick(cheers));await wait(800)}}
+const swipeScr=c=>put(`<div class="arrow">➜</div><h2 class="ins"></h2><div class="mb"><i></i></div><p class="sm">Swipe anywhere (drag with a mouse, or use arrow keys)</p>`,c);
+const victory=async()=>{put(`<div class="bigemoji">🏆</div><div class="gif">🎊🥳🎊</div><h1>LEVEL CLEARED</h1>`);confetti(50);await wait(2200)};
+
+async function intro(){
+ put(`<div class="loader"><div class="blobby"></div><p>Initializing something suspicious...</p></div>`);await wait(2800);
+ let s=put(`<div class="note buzz" id="n"><div class="ico">💬</div><div><b>New message · Just now</b><p>Hey Aarya! 👀 Someone has a little surprise for you.</p></div></div><p class="sm l" style="--d:1.5s">(tap the notification)</p>`);
+ await click(s,'#n');
+ s=put(`<div class="gif">🐣</div><h1 class="tilt">OH. YOU’RE HERE, AARYA! 🎉</h1><p class="l" style="--d:.9s">Okay, this is going to be interesting.</p><p class="l" style="--d:2.2s">Before we continue, I need you to follow a few very important and extremely unnecessary instructions.</p><button class="btn late" style="--d:3.8s">Okay, let’s go 👀</button>`);
+ await click(s,'.btn')}
+async function m1(){prog(1,'LEVEL 01 / 05');
+ let s=put(`<div class="tag">LEVEL 01</div><h1 class="tilt">THE BASIC TRAINING</h1><p>Let’s first check if you’re good at following instructions.</p><button class="btn">Bring it on</button>`);await click(s,'.btn');
+ B.classList.add('lock');s=swipeScr();
+ await swipes([{d:'up',t:'Swipe UP.'},{d:'down',t:'Now SWIPE DOWN.'},{d:'up',t:'Okay, that was easy. Do it again, but faster this time. Swipe UP!',m:'fast'},{d:'down',t:'And DOWN. Faster!',m:'fast'}],s);
+ B.classList.remove('lock');await victory();
+ await pickup(1,'Are you my favourite notification? Because one little appearance from you and suddenly my entire mood changes.');
+ await think(['Processing your performance...']);
+ await msg('Not bad. You’re hired. Unfortunately, there’s no salary.')}
+async function m2(){prog(2,'LEVEL 02 / 05');
+ let s=put(`<div class="tag">LEVEL 02</div><h1 class="tilt">DIRECTIONALLY CHALLENGED?</h1><p>Now let’s see if you know your directions.</p><button class="btn">I know my directions</button>`,'slideH');await click(s,'.btn');
+ B.classList.add('lock');s=swipeScr('slideH');
+ await swipes([{d:'right',t:'Swipe RIGHT.'},{d:'left',t:'Now swipe LEFT.'},{d:'right',t:'Okay, again. But slowly this time. RIGHT… sloooowly.',m:'slow'},{d:'left',t:'Now LEFT. Slowly. Savour it.',m:'slow'}],s);
+ B.classList.remove('lock');await victory();
+ await pickup(2,'Do you always make people smile this easily, or am I getting special treatment?','Continue',4)}
+async function m3(){prog(3,'LEVEL 03 / 05');
+ await msg(`<div class="tag">LEVEL 03</div><br>CAUSING A LITTLE CHAOS<p>Okay, things are getting serious now.</p>`,'Continue',1);
+ const s=put(`<h2>Pick up your phone and give it a little shake.</h2><p class="sm">To feel your shake, I need to ask your browser for motion access. It’s only for this game. Nothing is recorded.</p><button class="btn" id="en">Enable shake detection</button><div class="pad" id="pad">No sensor? Shake this box with your mouse or finger 🫨<span>0%</span></div>`);
+ let pct=0,done;const fin=new Promise(r=>done=r),pad=$('#pad');
+ const add=n=>{pct=Math.min(100,pct+n);$('span',pad).textContent=pct+'%';pad.style.transform=`rotate(${rnd(-6,6)}deg)`;if(pct>=100)done()};
+ let l=null,lt=0;const hm=e=>{const a=e.accelerationIncludingGravity;if(!a)return;const x=a.x||0,y=a.y||0,z=a.z||0;if(l&&Math.abs(x-l.x)+Math.abs(y-l.y)+Math.abs(z-l.z)>28&&Date.now()-lt>150){lt=Date.now();add(25)}l={x,y,z}};
+ $('#en').onclick=async()=>{try{if(typeof DeviceMotionEvent!=='undefined'&&DeviceMotionEvent.requestPermission){const r=await DeviceMotionEvent.requestPermission();if(r!=='granted')return toast('No sensor access. Use the box below!')}
+  if('DeviceMotionEvent' in window){addEventListener('devicemotion',hm);toast('Listening... go on, shake!')}else toast('No motion sensor here. Use the box!')}catch(e){toast('Sensor said no. Use the box!')}};
+ let lx=null,dir=0;pad.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'&&!e.buttons&&e.pressure===0)return;if(lx===null){lx=e.clientX;return}const d=e.clientX-lx;if(Math.abs(d)>14){const s2=Math.sign(d);if(s2!==dir){dir=s2;add(7)}lx=e.clientX}});
+ await fin;removeEventListener('devicemotion',hm);quake();
+ await msg('HELLO??? THE WHOLE WEBSITE MOVED. 🫨','Continue',2);
+ await pickup(3,'Is it weird that even an ordinary day feels a little better when you’re around?','Continue',4)}
+async function m4(){prog(4,'LEVEL 04 / 05');
+ await msg(`<div class="tag">LEVEL 04</div><br>GRAVITY HAS LEFT THE CHAT.`,'Continue',1);
+ let s=put(`<h2>Now turn your phone upside down.</h2><p class="sm">I’ll need to peek at your phone’s tilt sensor. Just for this game.</p><button class="btn" id="en">Enable tilt sensor</button><br><button class="btn" id="fl" style="background:#fff;color:#3a1030">No sensor? Flip it for me 🙃</button>`);
+ await new Promise(res=>{let n=0;const ho=e=>{if(e.beta!=null&&e.beta<-50){if(++n>3){removeEventListener('deviceorientation',ho);res()}}else n=0};
+  $('#fl',s).onclick=()=>{removeEventListener('deviceorientation',ho);res()};
+  $('#en',s).onclick=async()=>{try{if(typeof DeviceOrientationEvent!=='undefined'&&DeviceOrientationEvent.requestPermission){const r=await DeviceOrientationEvent.requestPermission();if(r!=='granted')return toast('No access. Use the flip button!')}addEventListener('deviceorientation',ho);toast('Okay, flip it. I’m watching 👀')}catch(e){toast('Sensor said no. Use the flip button!')}}});
+ B.classList.add('spin');await wait(1400);B.classList.remove('spin');
+ await msg('WAIT. YOU ACTUALLY DID IT? 😭','Continue',1.2);
+ s=put(`<h2>Now drag this little thing upwards from the bottom.</h2><div class="track"><div class="goal">🏁</div><div class="pull">PULL ME ↑</div></div><button class="btn late" id="sk" style="--d:12s;background:#fff;color:#3a1030;font-size:.8rem;padding:8px 16px">Can’t drag? Launch it 🚀</button>`);
+ const h=$('.pull',s),max=$('.track',s).clientHeight-70;
+ await new Promise(res=>{let sy=null,y=0;const set=v=>{y=Math.max(0,Math.min(max,v));h.style.transform=`translateY(${-y}px) rotate(${Math.sin(y/18)*9}deg) scaleY(${1+y/max*.25})`;h.textContent=y>max*.7?'ALMOST!!':y>max*.3?'WHEEE':'PULL ME ↑'};
+  h.onpointerdown=e=>{sy=e.clientY+y;h.classList.remove('back');h.setPointerCapture(e.pointerId)};
+  h.onpointermove=e=>{if(sy!==null)set(sy-e.clientY)};
+  h.onpointerup=h.onpointercancel=()=>{if(sy===null)return;sy=null;if(y>=max*.9){res()}else{h.classList.add('back');set(0);toast('Boing! Higher!')}};
+  $('#sk',s).onclick=()=>{h.classList.add('back');set(max);setTimeout(res,600)}});
+ confetti(40);await wait(900);
+ await pickup(4,'Are you a plot twist? Because I wasn’t expecting someone to make a simple little game this interesting.','Okay, one last challenge...',3)}
+async function m5(){prog(4.5,'LEVEL 05 / 05');
+ await msg(`<div class="tag">LEVEL 05</div><br>FIND THE SECRET`,'Continue',1);
+ const em=['🍓','🧃','🪩','🐸','💿','🫧','🧸','🍒'],lb=['NOT THIS','NOTHING HERE','KEEP LOOKING','SUSPICIOUS?','TOTALLY NORMAL','HMMM'];
+ const sc=em.map((e,i)=>`<span class="stk" style="left:${6+i*11%84}%;top:${(i*37)%78}%;--r:${rnd(-25,25)}deg">${e}</span>`).join('')+lb.map((t,i)=>`<b class="lab" style="left:${(i*29+8)%80}%;top:${(i*43+12)%85}%;--r:${rnd(-18,18)}deg">${t}</b>`).join('');
+ const s=put(`<h1 class="tilt">Something is missing...</h1><p>Look around. There’s something here that doesn’t belong.</p><p id="clue"></p><div class="scene">${sc}</div>`);
+ const sec=document.createElement('button');sec.className='secret';sec.setAttribute('aria-label','secret button');B.appendChild(sec);
+ const dec=['Nope, just a decoy.','Cute, but no.','That belongs here. Keep looking.','Not it. Rude of you to try though.'];
+ s.querySelectorAll('.stk').forEach(e=>e.onclick=()=>{e.classList.remove('hit');void e.offsetWidth;e.classList.add('hit');toast(pick(dec))});
+ const cl=['Clue 1: It’s small. Tiny, even.','Clue 2: It likes edges. Corners, specifically.','Clue 3: Bottom of the screen. Left side. You’re basically there.'],ts=[12000,30000,55000].map((t,i)=>setTimeout(()=>{const c=$('#clue');if(c)c.textContent=cl[i]},t));
+ await new Promise(r=>sec.onclick=r);ts.forEach(clearTimeout);sec.remove();confetti(60);toast('YOU FOUND IT 🕵️');await wait(1500);
+ await pickup(5,'Should I keep finding excuses to talk to you, or can I finally ask you out already?','Continue',4);
+ prog(5,'All levels cleared');await msg('Well... that was the final level.','Continue',1.5)}
+async function reveal(){B.classList.add('calm');$('#prog').style.display='none';await wait(1200);
+ for(const t of ['Okay, so... Aarya. 🫣','You’ve officially survived all my unnecessary instructions.','All those swipes, shakes, turns and secret missions...','Well, there was actually a reason behind all of this.','I wanted to make you smile before asking you something.'])await msg(t,'Continue',1.6,'calmScr');
+ await msg(`<span style="font-size:clamp(1rem,4vw,1.25rem);font-weight:400;line-height:1.7;display:block;text-align:left">Okay, real talk, Aarya. 🌈<br><br>You’re fun to talk to, and I wanted to do something a little different from a boring text.<br><br>So thanks for playing along. Honestly, that was already a win. 🧁</span>`,'I’m still here…',9)}
+async function ask(){
+ for(const t of ['So, after making you work this hard...','After all those unnecessary phone gymnastics...','I think I owe you a proper question.'])await msg(t,'Continue',1.8,'calmScr');
+ const s=put(`<div class="gif">🎟️</div><h2>A golden ticket for you, Aarya!</h2><div class="sc"><div class="under"><h2 class="grad">Wanna grab coffee or food with me sometime? ☕🍕</h2><p class="sm">Good chats, terrible jokes, zero pressure. 🐥</p></div><canvas id="cv"></canvas></div><p class="sm" id="hnt">(scratch it with your finger or mouse)</p><button class="btn late" id="rv" style="--d:15s;font-size:.8rem;padding:8px 16px;background:#fff;color:#3a1030">Can’t scratch? Tap to reveal 🪄</button><div id="ans" style="display:none"><p><b>So, what do you say?</b></p><button class="btn yes" id="yes">YES, I’M IN! 🎉</button><div style="height:78px"></div></div>`);
+ await new Promise(rv=>{const cv=$('#cv',s),c=cv.getContext('2d'),W=cv.width=cv.offsetWidth,H=cv.height=cv.offsetHeight;
+  const g=c.createLinearGradient(0,0,W,H);g.addColorStop(0,'#d9d9e3');g.addColorStop(.5,'#fafafa');g.addColorStop(1,'#b8b8c8');c.fillStyle=g;c.fillRect(0,0,W,H);c.fillStyle='#8a7fa0';c.font='800 22px Poppins,sans-serif';c.textAlign='center';c.fillText('✨ SCRATCH HERE ✨',W/2,H/2+8);
+  let dn=false,k=0,fin=false;const done=()=>{if(fin)return;fin=true;cv.style.transition='opacity .8s';cv.style.opacity=0;cv.style.pointerEvents='none';$('#ans',s).style.display='block';$('#hnt',s).remove();$('#rv',s).remove();confetti(40);rv()};
+  const sc=e=>{if(!dn)return;const r=cv.getBoundingClientRect();c.globalCompositeOperation='destination-out';c.beginPath();c.arc(e.clientX-r.left,e.clientY-r.top,24,0,7);c.fill();if(++k%8===0){const d=c.getImageData(0,0,W,H).data;let n=0,t=0;for(let i=3;i<d.length;i+=64){t++;if(!d[i])n++}if(n/t>.4)done()}};
+  cv.onpointerdown=e=>{dn=true;cv.setPointerCapture(e.pointerId);sc(e)};cv.onpointermove=sc;cv.onpointerup=cv.onpointercancel=()=>dn=false;$('#rv',s).onclick=done});
+ await wait(500);
+ const no=document.createElement('button');no.className='btn no';no.textContent='NO 🙃';B.appendChild(no);
+ const y=$('#yes'),yr=y.getBoundingClientRect();no.style.left=yr.left+'px';no.style.top=yr.bottom+16+'px';
+ const rx=['NOPE. NOT TODAY.','Nice try, bestie.','Why are we running?','That button has left the conversation.','Even the NO button knows the assignment.','PLEASE STOP CHASING ME 😭','YES is literally right there.'];let n=0,lastD=0;
+ const dodge=()=>{lastD=Date.now();n++;const W=innerWidth,H=innerHeight,b=no.getBoundingClientRect(),q=y.getBoundingClientRect(),w=Math.max(b.width,110),h=Math.max(b.height,52);let x,t,ok=false;
+  for(let i=0;i<50&&!ok;i++){x=rnd(10,W-w-10);t=rnd(60,H-h-10);const far=Math.hypot(x-b.left,t-b.top)>Math.min(170,W/3),hit=!(x+w+34<q.left||x-34>q.right||t+h+34<q.top||t-34>q.bottom);ok=far&&!hit}
+  if(!ok){x=q.left<W/2?W-w-10:10;t=q.top<H/2?H-h-10:70}
+  no.style.left=x+'px';no.style.top=t+'px';no.style.transform=`rotate(${rnd(-35,35)}deg) scale(${rnd(.65,1.15)}) skewX(${rnd(-14,14)}deg)`;toast(n%9===0?'Okay okay, I see you’re committed 😭':pick(rx))};
+ no.addEventListener('pointerenter',dodge);no.addEventListener('pointerdown',e=>{e.preventDefault();dodge()});no.addEventListener('touchstart',e=>{e.preventDefault();dodge()},{passive:false});no.addEventListener('click',e=>{e.preventDefault();dodge()});no.addEventListener('focus',dodge);
+ addEventListener('pointermove',e=>{if(!no.isConnected||Date.now()-lastD<350)return;const b=no.getBoundingClientRect();if(Math.hypot(e.clientX-(b.left+b.width/2),e.clientY-(b.top+b.height/2))<90)dodge()});
+ addEventListener('resize',()=>{if(no.isConnected)dodge()});
+ await click(s,'#yes');no.remove();B.classList.remove('calm')}
+async function finale(){const when=new Date(),stamp=when.toLocaleString([],{dateStyle:'full',timeStyle:'short'});confetti(160);quake();
+ await msg('WAITTTTTTT.','Continue',1.4);await msg('THAT’S A YES??? 😭 AARYA!!','Continue',1.4);
+ let s=put(`<div class="stamp">MISSION SUCCESSFULLY COMPLETED.</div><button class="btn late" style="--d:1.8s">Continue</button>`);confetti(80);await click(s,'.btn');
+ await msg(`Okay, I’m genuinely smiling right now.<p style="font-weight:400">You’ve officially made this entire unnecessarily complicated website worth it.</p>`,'Continue',2);
+ s=put(`<h2>Pick a vibe for our plan 👇</h2><div class="opts"><button class="opt">☕ Coffee and conversations.</button><button class="opt">🍜 Food and endless gossip.</button><button class="opt">🌆 A cute evening outing.</button></div>`);
+ const c=await new Promise(r=>s.querySelectorAll('.opt').forEach(o=>o.onclick=()=>r(o.textContent)));confetti(60);
+ try{localStorage.setItem('aarya-answer',JSON.stringify({answer:'YES',plan:c.trim(),at:when.toISOString()}))}catch(e){}
+ const f=put(`<div class="bigemoji">🎉</div><h1 class="grad">${c}</h1><p>Looks like we have something to look forward to.</p><p><b>See you soon, Aarya! :)</b></p><div class="gif">🧸🍓🦄🧁</div><p class="sm">📅 Logged: ${stamp}</p><button class="btn" id="cp">Copy my answer 📋</button>`);
+ $('#cp',f).onclick=async()=>{try{await navigator.clipboard.writeText(`Aarya said YES! 🎉 Plan: ${c.trim()} · ${stamp}`);toast('Copied! Send it over 😌')}catch(e){toast('Copy failed. Screenshot this instead 📸')}}}
+(async()=>{await intro();await m1();await m2();await m3();await m4();await m5();await reveal();await ask();await finale()})();
+setInterval(()=>{const f=$('#fl');if(!f||document.hidden||f.children.length>6)return;const e=document.createElement('span');e.className='fe';e.textContent=pick(['🧸','🍓','🦄','🧁','🐥','🌈','🍭','🫧','🐰','⭐']);e.style.left=rnd(2,94)+'vw';e.style.animationDuration=rnd(8,14)+'s';f.appendChild(e);setTimeout(()=>e.remove(),14500)},1800);
+let ml=0;$('#mas').onclick=()=>{ml++;const l=['Hi. I’m Blobby. I’m not allowed to give hints.','Stop poking me. Okay, poke once more.','I know everything. I’ll say nothing.','Fine. The secret is small. That’s all.'];if(ml===6){confetti(50);toast('EASTER EGG: you poked Blobby 6 times 🥇')}else toast(l[ml%l.length])};
+let ls=0;addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||Date.now()-ls<70)return;ls=Date.now();const s=document.createElement('span');s.className='sp';s.textContent='✨';s.style.left=e.clientX+'px';s.style.top=e.clientY+'px';B.appendChild(s);setTimeout(()=>s.remove(),800)});
+</script></body></html>
