@@ -5,9 +5,10 @@
 <style>
 :root{--p1:#ffe3ee;--p2:#ffb3d1;--p3:#ff7eb6;--p4:#ff2e93;--pu:#9b6bff;--ink:#3a1030;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box;margin:0}
-html,body{height:100%}
+html,body{height:100%;height:100dvh;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+body{touch-action:manipulation;-webkit-user-select:none;user-select:none}
 body{font-family:Fredoka,Poppins,Inter,system-ui,sans-serif;color:var(--ink);background:linear-gradient(135deg,#ffe3ee,#ffc2dd 50%,#e8d5ff);overflow:hidden;overscroll-behavior:none;transition:background 3s}
-body.lock{touch-action:none}
+body.lock,body.lock #app,body.lock #app *{touch-action:none}
 .blob{position:fixed;border-radius:50%;filter:blur(50px);opacity:.7;z-index:0;animation:drift 14s ease-in-out infinite alternate}
 .b1{width:48vmax;height:48vmax;background:#ff8cc6;left:-15vmax;top:-12vmax}
 .b2{width:40vmax;height:40vmax;background:#c9a8ff;right:-12vmax;bottom:-10vmax;animation-duration:19s}
@@ -16,7 +17,7 @@ body.lock{touch-action:none}
 #prog{position:fixed;top:calc(env(safe-area-inset-top,0px) + 8px);left:50%;transform:translateX(-50%);width:min(88vw,420px);z-index:20;text-align:center;font-size:12px;font-weight:600}
 #bar{height:14px;border:3px solid var(--ink);border-radius:99px;background:#fff;overflow:hidden;margin-top:3px}
 #fill{display:block;height:100%;width:0;background:repeating-linear-gradient(45deg,var(--p4) 0 10px,var(--p3) 10px 20px);transition:width .8s cubic-bezier(.34,1.8,.5,1)}
-#app{position:relative;z-index:5;height:100%;display:flex;overflow-y:auto;padding:54px 0 20px}
+#app{position:relative;z-index:5;height:100%;display:flex;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:54px 0 20px}
 .scr{margin:auto;width:min(92vw,560px);text-align:center;padding:12px;animation:pop .6s cubic-bezier(.34,1.56,.64,1)}
 .slideH{animation:slideH .7s cubic-bezier(.34,1.3,.64,1)}
 @keyframes slideH{from{transform:translateX(110vw) rotate(8deg)}}
@@ -30,7 +31,7 @@ p{font-size:clamp(1rem,4vw,1.2rem);line-height:1.5;margin:8px 0}
 .tag{display:inline-block;background:var(--pu);color:#fff;font-weight:800;font-size:.8rem;letter-spacing:.1em;padding:6px 14px;border-radius:99px;transform:rotate(3deg);animation:wig 2.4s ease-in-out infinite;border:3px solid var(--ink)}
 @keyframes wig{50%{transform:rotate(-3deg) scale(1.06)}}
 .btn{font:800 1rem Poppins,sans-serif;background:var(--p4);color:#fff;border:3px solid var(--ink);border-radius:99px;padding:14px 28px;margin-top:16px;box-shadow:4px 4px 0 var(--ink);cursor:pointer;transition:transform .35s cubic-bezier(.34,1.8,.5,1),box-shadow .2s}
-.btn:hover{transform:translate(-2px,-3px) rotate(-3deg) scale(1.07);box-shadow:7px 7px 0 var(--ink)}
+@media (hover:hover){.btn:hover{transform:translate(-2px,-3px) rotate(-3deg) scale(1.07);box-shadow:7px 7px 0 var(--ink)}}
 .btn:active{transform:translate(3px,3px) scale(.95);box-shadow:1px 1px 0 var(--ink)}
 .late,.l{animation:appear .6s var(--d,1s) both}
 @keyframes appear{from{opacity:0;visibility:hidden;transform:translateY(14px) scale(.9)}to{opacity:1;visibility:visible}}
@@ -64,12 +65,13 @@ body.spin #app{animation:spin 1.3s cubic-bezier(.5,-.3,.3,1.3)}
 .goal{position:absolute;top:8px;left:0;right:0;font-size:2rem;animation:bounce .7s infinite alternate}
 .pull{position:absolute;bottom:0;left:0;right:0;height:64px;border-radius:70px;background:var(--p4);color:#fff;border:3px solid var(--ink);font-weight:800;font-size:.8rem;display:grid;place-items:center;cursor:grab;touch-action:none;user-select:none;box-shadow:4px 4px 0 var(--ink)}
 .pull.back{transition:transform .7s cubic-bezier(.3,2,.5,1)}
-.scene{position:relative;height:min(42vh,320px);margin-top:10px}
+.scene{position:relative;height:min(42vh,320px);margin-top:10px;overflow:hidden}
 .stk{position:absolute;font-size:2.6rem;cursor:pointer;transform:rotate(var(--r));animation:wig 3s ease-in-out infinite;user-select:none}
 .stk.hit{animation:buzz .5s}
 .lab{position:absolute;background:#fff;border:3px solid var(--ink);padding:3px 10px;font-size:.7rem;font-weight:800;border-radius:8px;transform:rotate(var(--r));animation:wig 4s infinite}
 .secret{position:fixed;left:7px;bottom:calc(env(safe-area-inset-bottom,0px) + 7px);width:16px;height:16px;border-radius:50%;border:2px solid var(--ink);background:var(--p3);opacity:.35;cursor:pointer;z-index:30;padding:0}
 .secret:hover{opacity:1;transform:scale(1.6)}
+.secret::after{content:"";position:absolute;inset:-14px}
 #clue{min-height:1.6em;font-weight:600;color:var(--pu)}
 #mas{position:fixed;right:10px;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);width:46px;height:42px;background:var(--p3);border:3px solid var(--ink);border-radius:50% 50% 45% 55%;z-index:25;cursor:pointer;animation:morph 6s ease-in-out infinite;display:flex;gap:7px;align-items:center;justify-content:center}
 #mas i{width:7px;height:10px;background:var(--ink);border-radius:50%;animation:blink 4s infinite}
@@ -167,7 +169,7 @@ async function m3(){prog(3,'LEVEL 03 / 05');
  const s=put(`<h2>Pick up your phone and give it a little shake.</h2><p class="sm">To feel your shake, I need to ask your browser for motion access. It’s only for this game. Nothing is recorded.</p><button class="btn" id="en">Enable shake detection</button><div class="pad" id="pad">No sensor? Shake this box with your mouse or finger 🫨<span>0%</span></div>`);
  let pct=0,done;const fin=new Promise(r=>done=r),pad=$('#pad');
  const add=n=>{pct=Math.min(100,pct+n);$('span',pad).textContent=pct+'%';pad.style.transform=`rotate(${rnd(-6,6)}deg)`;if(pct>=100)done()};
- let l=null,lt=0;const hm=e=>{const a=e.accelerationIncludingGravity;if(!a)return;const x=a.x||0,y=a.y||0,z=a.z||0;if(l&&Math.abs(x-l.x)+Math.abs(y-l.y)+Math.abs(z-l.z)>28&&Date.now()-lt>150){lt=Date.now();add(25)}l={x,y,z}};
+ let l=null,lt=0;const hm=e=>{const a=e.accelerationIncludingGravity;if(!a)return;const x=a.x||0,y=a.y||0,z=a.z||0;if(l&&Math.abs(x-l.x)+Math.abs(y-l.y)+Math.abs(z-l.z)>16&&Date.now()-lt>120){lt=Date.now();add(25)}l={x,y,z}};
  $('#en').onclick=async()=>{try{if(typeof DeviceMotionEvent!=='undefined'&&DeviceMotionEvent.requestPermission){const r=await DeviceMotionEvent.requestPermission();if(r!=='granted')return toast('No sensor access. Use the box below!')}
   if('DeviceMotionEvent' in window){addEventListener('devicemotion',hm);toast('Listening... go on, shake!')}else toast('No motion sensor here. Use the box!')}catch(e){toast('Sensor said no. Use the box!')}};
  let lx=null,dir=0;pad.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'&&!e.buttons&&e.pressure===0)return;if(lx===null){lx=e.clientX;return}const d=e.clientX-lx;if(Math.abs(d)>14){const s2=Math.sign(d);if(s2!==dir){dir=s2;add(7)}lx=e.clientX}});
@@ -212,11 +214,11 @@ async function ask(){
  await new Promise(rv=>{const cv=$('#cv',s),c=cv.getContext('2d'),W=cv.width=cv.offsetWidth,H=cv.height=cv.offsetHeight;
   const g=c.createLinearGradient(0,0,W,H);g.addColorStop(0,'#d9d9e3');g.addColorStop(.5,'#fafafa');g.addColorStop(1,'#b8b8c8');c.fillStyle=g;c.fillRect(0,0,W,H);c.fillStyle='#8a7fa0';c.font='800 22px Poppins,sans-serif';c.textAlign='center';c.fillText('✨ SCRATCH HERE ✨',W/2,H/2+8);
   let dn=false,k=0,fin=false;const done=()=>{if(fin)return;fin=true;cv.style.transition='opacity .8s';cv.style.opacity=0;cv.style.pointerEvents='none';$('#ans',s).style.display='block';$('#hnt',s).remove();$('#rv',s).remove();confetti(40);rv()};
-  const sc=e=>{if(!dn)return;const r=cv.getBoundingClientRect();c.globalCompositeOperation='destination-out';c.beginPath();c.arc(e.clientX-r.left,e.clientY-r.top,24,0,7);c.fill();if(++k%8===0){const d=c.getImageData(0,0,W,H).data;let n=0,t=0;for(let i=3;i<d.length;i+=64){t++;if(!d[i])n++}if(n/t>.4)done()}};
+  const sc=e=>{if(!dn)return;const r=cv.getBoundingClientRect();c.globalCompositeOperation='destination-out';c.beginPath();c.arc((e.clientX-r.left)*W/r.width,(e.clientY-r.top)*H/r.height,26*W/r.width,0,7);c.fill();if(++k%8===0){const d=c.getImageData(0,0,W,H).data;let n=0,t=0;for(let i=3;i<d.length;i+=64){t++;if(!d[i])n++}if(n/t>.4)done()}};
   cv.onpointerdown=e=>{dn=true;cv.setPointerCapture(e.pointerId);sc(e)};cv.onpointermove=sc;cv.onpointerup=cv.onpointercancel=()=>dn=false;$('#rv',s).onclick=done});
  await wait(500);
  const no=document.createElement('button');no.className='btn no';no.textContent='NO 🙃';B.appendChild(no);
- const y=$('#yes'),yr=y.getBoundingClientRect();no.style.left=yr.left+'px';no.style.top=yr.bottom+16+'px';
+ const y=$('#yes');y.scrollIntoView({block:'center'});await wait(350);const yr=y.getBoundingClientRect();no.style.left=Math.max(10,Math.min(yr.left,innerWidth-130))+'px';no.style.top=Math.min(yr.bottom+16,innerHeight-70)+'px';
  const rx=['NOPE. NOT TODAY.','Nice try, bestie.','Why are we running?','That button has left the conversation.','Even the NO button knows the assignment.','PLEASE STOP CHASING ME 😭','YES is literally right there.'];let n=0,lastD=0;
  const dodge=()=>{lastD=Date.now();n++;const W=innerWidth,H=innerHeight,b=no.getBoundingClientRect(),q=y.getBoundingClientRect(),w=Math.max(b.width,110),h=Math.max(b.height,52);let x,t,ok=false;
   for(let i=0;i<50&&!ok;i++){x=rnd(10,W-w-10);t=rnd(60,H-h-10);const far=Math.hypot(x-b.left,t-b.top)>Math.min(170,W/3),hit=!(x+w+34<q.left||x-34>q.right||t+h+34<q.top||t-34>q.bottom);ok=far&&!hit}
